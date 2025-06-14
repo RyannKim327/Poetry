@@ -1,9 +1,9 @@
 {
   "name": "poetry",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
-  "homepage": "https://ryannkim327.github.io/poetry",
+  "homepage": "https://ryannkim327.github.io/Poetry",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
