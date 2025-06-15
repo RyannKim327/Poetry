@@ -27,7 +27,7 @@ function App() {
       <div className="flex flex-col w-1/3 bg-[#FFF1E6] md:w-3/12 gap-1 p-2 box-border">
         {/* TODO: Poem list */}
         <p className="bg-[#F2D7D9] text-center p-[3px] rounded cursor-pointer border-[#C3BABA] border-2 border-solid">
-          Poems List
+          Poems List <span className="text-[10px]">[{poems.length}]</span>
         </p>
         <div className="flex flex-col overflow-y-scroll gap-1">
           {loading ? (
