@@ -3,7 +3,9 @@ import sqlite3
 
 class database:
     def __init__(self):
-        self.dbase = sqlite3.connect("a.sqlite", check_same_thread=False)
+        self.dbase = sqlite3.connect(
+            "archive/backend/database/a.sqlite", check_same_thread=False
+        )
         self.cur = self.dbase.cursor()
         self.cur.execute(
             """
