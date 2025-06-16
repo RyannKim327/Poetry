@@ -1,1 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap");
 @import "tailwindcss";
+
+.dancing-script {
+  font-family: "Dancing Script", cursive;
+  font-weight: 700;
+  font-style: oblique;
+}
