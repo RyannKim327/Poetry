@@ -24,14 +24,14 @@ function App() {
 
   return (
     <div className="flex h-dvh w-dvw bg-[#F5ECD9] text-[#2e2e2e] box-border select-none">
-      <div className="flex flex-col w-1/3 bg-[#A58D7F] text-[#3B2F2F] md:w-3/12 gap-1 p-2 box-border">
+      <div className="flex flex-col w-1/3 bg-[#F5ECD9] text-[#3B2F2F] md:w-3/12 gap-1 p-2 box-border">
         {/* TODO: Poem list */}
-        <p className="bg-[#A58D7F] text-center p-[3px] rounded cursor-pointer border-[#3B2F2F] border-2 border-solid">
+        <p className="bg-[#F5ECD9] text-center p-[3px] rounded cursor-pointer border-[#3B2F2F] border-1 border-solid">
           Poems List <span className="text-[10px]">[{poems.length}]</span>
         </p>
         <div className="flex flex-col overflow-y-scroll gap-1">
           {loading ? (
-            <p className="bg-[#A58D7F] p-[3px] rounded cursor-pointer border-[#3B2F2F] border-2 border-solid">
+            <p className="bg-[F5ECD9] p-[3px] rounded cursor-pointer border-[#3B2F2F] border-1 border-solid">
               Please Wait
             </p>
           ) : (
@@ -43,7 +43,7 @@ function App() {
                 onClick={() => {
                   setPoem(poems[i]);
                 }}
-                className="bg-[#A58D7F] p-[3px] rounded cursor-pointer border-[#3B2F2F] border-2 border-solid"
+                className="bg-[#F5ECD9] p-[3px] rounded cursor-pointer border-[#3B2F2F] border-1 border-solid"
               >
                 {p.title}
               </div>
@@ -53,18 +53,27 @@ function App() {
           })}
         </div>
       </div>
-      <div className="flex flex-col border-[#3B2F2F] border-2 border-solid rounded justify-start items-center w-full bg-#A58D7F m-2 box-border">
-        <p className="text-[#3B2F2F] text-lg md:text-5xl font-serif">
+      <div className="flex flex-col border-[#3B2F2F] rounded justify-start items-center w-full bg-[#F5ECD9] m-2 box-border shadow-[0_0_10px_#A58D7F]">
+        <p className="text-[#3B2F2F] text-lg md:text-5xl font-serif pb-4 md:pb-6">
           {poem?.title}
         </p>
-        <p className="overflow-y-scroll text-wrap w-full px-2 pb-4 md:px-6">
+        <p className="overflow-y-scroll text-wrap w-full pb-4">
           {poem?.content.map((c, i) => {
             return (
-              <p
-                className={`${i % 4 == 0 && poem.content.length > 5 ? "mt-4 md:mt-10" : ""} px-2 dancing-script border-b-[1px] border-solid border-b-[#A58D7F] text-lg`}
-              >
-                {c}
-              </p>
+              <div>
+                {i % 4 == 0 && i > 0 ? (
+                  <p className="px-4 md:px-6 dancing-script border-b-1 border-solid border-b-[#A58D7F] text-lg text-transparent">
+                    .{" "}
+                  </p>
+                ) : (
+                  ""
+                )}
+                <p
+                  className={`px-4 md:px-6 dancing-script border-b-1 border-solid border-b-[#A58D7F] text-lg`}
+                >
+                  {c}
+                </p>
+              </div>
             );
           })}
         </p>
