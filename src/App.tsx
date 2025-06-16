@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import type { Poems } from "./types";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSortUp,
+  faSortDown,
+  faSort,
+} from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [poems, setPoems] = useState<Poems[]>([]);
   const [poem, setPoem] = useState<Poems>();
   const [loading, setLoading] = useState(true);
-
+  const [sort, setSort] = useState("");
+  const [defaultList, setDefaultList] = useState<Poems[]>([]);
   useEffect(() => {
     (async () => {
       const { data } = await axios.get(
@@ -14,6 +21,7 @@ function App() {
       );
       const d = JSON.parse(data.files["poetry.json"].content);
       setPoems(d.reverse());
+      setDefaultList(d.reverse());
     })();
   }, []);
 
@@ -22,16 +30,52 @@ function App() {
     setLoading(false);
   }, [poems]);
 
+  useEffect(() => {
+    switch (sort) {
+      case "a":
+        setPoems(
+          [...defaultList].sort((a, b) => a.title.localeCompare(b.title)),
+        );
+        break;
+      case "d":
+        setPoems(
+          [...defaultList].sort((a, b) => b.title.localeCompare(a.title)),
+        );
+        break;
+      default:
+        setPoems(defaultList);
+    }
+  }, [sort]);
+
+  const setSortList = () => {
+    switch (sort) {
+      case "a":
+        setSort("d");
+        break;
+      case "d":
+        setSort("");
+        break;
+      default:
+        setSort("a");
+    }
+  };
+
   return (
     <div className="flex h-dvh w-dvw bg-[#F5ECD9] text-[#2e2e2e] box-border select-none">
       <div className="flex flex-col w-1/3 bg-[#F5ECD9] text-[#3B2F2F] md:w-3/12 gap-1 p-2 box-border">
         {/* TODO: Poem list */}
-        <p className="bg-[#F5ECD9] text-center p-[3px] rounded cursor-pointer border-[#3B2F2F] border-1 border-solid">
-          Poems List <span className="text-[10px]">[{poems.length}]</span>
+        <p
+          onClick={() => setSortList()}
+          className="bg-[#F5ECD9] text-center p-[3px] rounded cursor-pointer border-[#3B2F2F] border-1 border-solid"
+        >
+          Poems List <span className="text-[10px] mr-2">[{poems.length}]</span>
+          <FontAwesomeIcon
+            icon={sort == "a" ? faSortUp : sort == "d" ? faSortDown : faSort}
+          />
         </p>
         <div className="flex flex-col overflow-y-scroll gap-1">
           {loading ? (
-            <p className="bg-[F5ECD9] p-[3px] rounded cursor-pointer border-[#3B2F2F] border-1 border-solid">
+            <p className="bg-[#F5ECD9] p-[3px] rounded cursor-pointer border-[#3B2F2F] border-1 border-solid">
               Please Wait
             </p>
           ) : (
@@ -57,7 +101,7 @@ function App() {
         <p className="text-[#3B2F2F] text-lg md:text-5xl font-serif pb-4 md:pb-6">
           {poem?.title}
         </p>
-        <p className="overflow-y-scroll text-wrap w-full pb-4">
+        <div className="overflow-y-scroll text-wrap w-full pb-4">
           {poem?.content.map((c, i) => {
             return (
               <div>
@@ -76,7 +120,7 @@ function App() {
               </div>
             );
           })}
-        </p>
+        </div>
       </div>
     </div>
   );
