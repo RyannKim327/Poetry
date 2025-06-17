@@ -70,7 +70,7 @@ function App() {
   return (
     <div className="flex h-dvh w-dvw bg-[#F5ECD9] text-[#2e2e2e] box-border select-none">
       <div
-        className={`${selected ? "flex z-10 md:z-0" : "hidden"} md:flex flex-col w-1/2 absolute md:static md:w-1/3 bg-[#F5ECD9] text-[#3B2F2F] md:w-3/12 gap-1 p-2 box-border`}
+        className={`${selected ? "flex z-10 md:z-0" : "hidden"} md:flex flex-col h-full w-1/2 absolute md:static bg-[#F5ECD9] text-[#3B2F2F] md:w-3/12 gap-1 p-2 box-border`}
       >
         {/* TODO: Poem list */}
         <p
