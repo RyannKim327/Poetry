@@ -15,6 +15,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [sort, setSort] = useState("");
   const [defaultList, setDefaultList] = useState<Poems[]>([]);
+  const [selected, setSelected] = useState<boolean>(true);
 
   useEffect(() => {
     (async () => {
@@ -28,8 +29,8 @@ function App() {
   }, []);
 
   useEffect(() => {
-    document.title = poem?.title || ""
-  }, [poem])
+    document.title = poem?.title || "";
+  }, [poem]);
 
   useEffect(() => {
     setPoem(poems[0]);
@@ -68,7 +69,9 @@ function App() {
 
   return (
     <div className="flex h-dvh w-dvw bg-[#F5ECD9] text-[#2e2e2e] box-border select-none">
-      <div className="flex flex-col w-1/3 bg-[#F5ECD9] text-[#3B2F2F] md:w-3/12 gap-1 p-2 box-border">
+      <div
+        className={`${selected ? "flex z-10 md:z-0" : "hidden"} md:flex flex-col w-1/2 absolute md:static md:w-1/3 bg-[#F5ECD9] text-[#3B2F2F] md:w-3/12 gap-1 p-2 box-border`}
+      >
         {/* TODO: Poem list */}
         <p
           onClick={() => setSortList()}
@@ -92,6 +95,7 @@ function App() {
               <div
                 onClick={() => {
                   setPoem(poems[i]);
+                  setSelected(false);
                 }}
                 className={`${p.title.charCodeAt(0) > 255 ? "baybayin" : "font-serif"} bg-[#F5ECD9] p-[3px] rounded cursor-pointer border-[#3B2F2F] border-1 border-solid`}
               >
@@ -103,7 +107,7 @@ function App() {
           })}
         </div>
       </div>
-      <Poem poem={poem} />
+      <Poem setSelected={setSelected} poem={poem} />
     </div>
   );
 }
