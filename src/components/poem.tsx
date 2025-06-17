@@ -23,7 +23,7 @@ export default function Poem(props: props){
                   ""
                 )}
                 <p
-                  className={`${c.charCodeAt(0) > 255 ? "baybayin italic" : "dancing-script"} px-4 md:px-6 border-b-1 border-solid border-b-[#A58D7F] text-lg`}
+                  className={`${c.charCodeAt(0) > 255 ? "baybayin italic" : "dancing-script"} px-4 md:px-6 border-b-1 border-solid border-b-[#A58D7F] text-lg lg:text-2xl`}
                 >
                   {c}
                 </p>
