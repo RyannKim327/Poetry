@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import type { Poems } from "./types";
-import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSortUp,
@@ -20,7 +19,7 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      const data = await FetchGist()
+      const data = await FetchGist();
       const d = JSON.parse(data.files[env.VITE_GIST_FILE].content);
       setPoems(d.reverse());
       setDefaultList(d);
