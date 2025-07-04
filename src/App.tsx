@@ -7,7 +7,7 @@ import {
   faSort,
 } from "@fortawesome/free-solid-svg-icons";
 import Poem from "./components/poem";
-import env, { FetchGist } from "./gist";
+import { FetchGist } from "./gist";
 
 function App() {
   const [poems, setPoems] = useState<Poems[]>([]);
@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     (async () => {
       const data = await FetchGist();
-      const d = JSON.parse(data.files[env.VITE_GIST_FILE].content);
+      const d = JSON.parse(data.files["poetry.json"].content);
       setPoems(d.reverse());
       setDefaultList(d);
     })();

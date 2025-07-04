@@ -2,23 +2,23 @@
  * TODO: To create some read and write access with security
  */
 
-import { z } from "zod";
+// import { z } from "zod";
 // import type { Poems } from "./types";
 import axios from "axios";
 
-const envSchema = z.object({
-  // VITE_GIST_TOKEN: z.string(),
-  VITE_GIST_ID: z.string(),
-  VITE_GIST_FILE: z.string(),
-});
+// const envSchema = z.object({
+//   // VITE_GIST_TOKEN: z.string(),
+//   VITE_GIST_ID: z.string(),
+//   VITE_GIST_FILE: z.string(),
+// });
 
-const env = envSchema.parse(import.meta.env);
+// const env = envSchema.parse(import.meta.env);
 
-export default env;
+// export default env;
 
 export async function FetchGist() {
   const { data } = await axios.get(
-    `https://api.github.com/gists/${env.VITE_GIST_ID}`,
+    `https://api.github.com/gists/2e046e79d8f56d56be8098b17d615f4e`,
   );
   console.log(data);
   return data;
