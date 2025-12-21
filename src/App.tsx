@@ -9,6 +9,13 @@ import {
 import Poem from "./components/poem";
 // import { FetchGist } from "./gist";
 import axios from "axios";
+import { z } from "zod";
+
+const envScheme = z.object({
+  VITE_API_URL: z.string().optional(),
+});
+
+const env = envScheme.parse(import.meta.env);
 
 function App() {
   const [poems, setPoems] = useState<Poems[]>([]);
@@ -20,9 +27,7 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get(
-        "https://api-mpop-backend.onrender.com/poetry",
-      );
+      const { data } = await axios.get(env.VITE_API_URL || "");
       setPoems(data);
       setDefaultList(data);
     })();
