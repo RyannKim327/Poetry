@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Poem from "./components/poem";
 import { FetchGist } from "./gist";
+import axios from "axios";
 
 function App() {
   const [poems, setPoems] = useState<Poems[]>([]);
@@ -19,10 +20,11 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      const data = await FetchGist();
-      const d = JSON.parse(data.files["poetry.json"].content);
-      setPoems(d.reverse());
-      setDefaultList(d);
+      const { data } = await axios.get(
+        "https://api-mpop-backend.onrender.com/poetry",
+      );
+      setPoems(data);
+      setDefaultList(data);
     })();
   }, []);
 
