@@ -7,7 +7,7 @@ import {
   faSort,
 } from "@fortawesome/free-solid-svg-icons";
 import Poem from "./components/poem";
-import { FetchGist } from "./gist";
+// import { FetchGist } from "./gist";
 import axios from "axios";
 
 function App() {
