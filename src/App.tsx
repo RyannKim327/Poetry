@@ -28,8 +28,8 @@ function App() {
   useEffect(() => {
     (async () => {
       const { data } = await axios.get(env.VITE_API_URL || "");
-      setPoems(data);
-      setDefaultList(data);
+      setPoems(data.data);
+      setDefaultList(data.data);
     })();
   }, []);
 
