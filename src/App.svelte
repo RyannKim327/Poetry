@@ -8,7 +8,10 @@
   const HOST: string = "https://mpopreverseii.leapcell.app";
 
   let show = true;
-  let poem: Record<string, any> = {};
+  let poem: Record<string, any> = {
+    title: "",
+    content: [],
+  };
 
   onMount(async () => {
     const { data } = await axios.get(`${HOST}/poetry`);
@@ -46,7 +49,7 @@
       {#each filter as poems_}
         <span
           role="button"
-          class={`${c.charCodeAt(0) > 255 ? "baybayin" : ""} bg-[#121212]/15 p-1 rounded cursor-pointer`}
+          class={`${poems_.title.charCodeAt(0) > 255 ? "baybayin" : ""} bg-[#121212]/15 p-1 rounded cursor-pointer`}
           onclick={() => {
             poem = {
               title: poems_.title,
@@ -68,15 +71,20 @@
       }}
       >&lt;-
     </span>
-    <span class="text-[1.5rem] w-full text-center">{poem.title}</span>
+    <span
+      class={`${poem.title.charCodeAt(0) > 255 ? "baybayin" : ""} text-[1.5rem] w-full text-center`}
+      >{poem.title}</span
+    >
     <div
-      class={`${c.charCodeAt(0) > 255 ? "baybayin" : ""} flex flex-col gap-1 w-full overflow-y-auto`}
+      class={`${poem.title.charCodeAt(0) > 255 ? "baybayin" : ""} flex flex-col gap-1 w-full overflow-y-auto`}
     >
       {#each poem.content as content, index}
         {#if index % 4 == 0}
           <p class="select-none text-transparent">.</p>
         {/if}
-        <p class={`${c.charCodeAt(0) > 255 ? "baybayin" : ""}`}>{content}</p>
+        <p class={`${content.charCodeAt(0) > 255 ? "baybayin" : ""}`}>
+          {content}
+        </p>
         <hr />
       {/each}
     </div>
