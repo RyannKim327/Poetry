@@ -1,1 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Tagalog&display=swap");
 @import "tailwindcss";
+
+.baybayin {
+  font-family: "Noto Sans Tagalog", sans-serif;
+  font-weight: 400;
+}

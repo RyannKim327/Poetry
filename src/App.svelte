@@ -46,7 +46,7 @@
       {#each filter as poems_}
         <span
           role="button"
-          class="bg-[#121212]/15 p-1 rounded cursor-pointer"
+          class={`${c.charCodeAt(0) > 255 ? "baybayin" : ""} bg-[#121212]/15 p-1 rounded cursor-pointer`}
           onclick={() => {
             poem = {
               title: poems_.title,
@@ -69,12 +69,14 @@
       >&lt;-
     </span>
     <span class="text-[1.5rem] w-full text-center">{poem.title}</span>
-    <div class="flex flex-col gap-1 w-full overflow-y-auto">
+    <div
+      class={`${c.charCodeAt(0) > 255 ? "baybayin" : ""} flex flex-col gap-1 w-full overflow-y-auto`}
+    >
       {#each poem.content as content, index}
         {#if index % 4 == 0}
           <p class="select-none text-transparent">.</p>
         {/if}
-        <p>{content}</p>
+        <p class={`${c.charCodeAt(0) > 255 ? "baybayin" : ""}`}>{content}</p>
         <hr />
       {/each}
     </div>
